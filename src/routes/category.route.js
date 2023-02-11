@@ -4,7 +4,7 @@ import uploadRouter from "../controller/uploadController.js";
 import verifyToken from "../middleware/auth.js";
 const router = express.Router();
 
-router.get('/getAllCategory', verifyToken, getAllCategory)
+router.get('/getAllCategory', getAllCategory)
 router.post('/addCategory', addCategory)
 router.delete('/:id', deleteCategory)
 router.get('/:id',getCategoryById)
