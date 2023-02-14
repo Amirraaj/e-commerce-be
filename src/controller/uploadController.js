@@ -3,7 +3,7 @@ import multer from "multer";
 import path from "path";
 
 const storage = multer.diskStorage({
-  destination: "./public/uploads",
+  destination: "./public",
 
   filename: (req, file, callback) => {
     let ext = path.extname(file.originalname);
@@ -21,7 +21,6 @@ const imageFileFilter = (req, file, cb) => {
 
 const upload = multer({
   storage: storage,
-
   fileFilter: imageFileFilter,
 });
 

@@ -7,7 +7,11 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         require:true,
     },
-    discription:{
+    intro:{
+        type:String,
+        require:true,
+    },
+    description:{
         type: String,
         require:true,
     },
@@ -16,7 +20,7 @@ const ProductSchema = new mongoose.Schema({
         require: true
     },
     price:{
-        type: Number,
+        type: String,
         require:true,
     },
     discount:{

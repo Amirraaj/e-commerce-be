@@ -22,7 +22,7 @@ export const getAllCategory =  async(request, response) =>{
 
 export const deleteCategory = async(request, response) =>{
     try {
-        await Category.deleteOne({id:request.params.id});
+        await Category.findByIdAndRemove(request.params.id);
         response.json({ status: 201, message:"Categoty deleted sucessfully"});
     } catch (error) {
         response.json({status:500, message:"Internal Server error"})
