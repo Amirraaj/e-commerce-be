@@ -1,6 +1,7 @@
 
 import Category from "../model/category.js";
 
+
 export const addCategory = async(request, response) => {
     try {
      const category = request.body;
@@ -41,10 +42,8 @@ export const getCategoryById = async( request, response) =>{
 export const editCategory = async(request, response) => {
     try {
         const category = request.body;
-        const editCategory = new Category(category);
-
-        await Category.updateOne({id:request.params.id},editCategory );
-        response.json({ status: 201, message:"Category Updated sucessfully", data: editCategory});
+        await Category.findByIdAndUpdate(request.params.id,{$set:category},{new:true});
+        response.json({ status: 201, message:"Category Updated sucessfully", data: category});
         
     } catch (error) {
         response.json({status:500, message:"Internal Server error"}) 

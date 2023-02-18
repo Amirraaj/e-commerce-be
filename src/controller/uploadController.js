@@ -1,15 +1,22 @@
-import express from "express"
+import express from "express";
 import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
 import path from "path";
 
 const storage = multer.diskStorage({
-  destination: "./public",
+  // destination: "./public/upload",
 
   filename: (req, file, callback) => {
     let ext = path.extname(file.originalname);
 
     callback(null, `${file.fieldname}-${Date.now()}${ext}`);
   },
+});
+
+cloudinary.config({
+  cloud_name: "dehuqnzug",
+  api_key: "243318197547763",
+  api_secret: "VCJWeThPJYf8E3wmbfJ6OlDhCzI",
 });
 
 const imageFileFilter = (req, file, cb) => {
@@ -19,7 +26,7 @@ const imageFileFilter = (req, file, cb) => {
   cb(null, true);
 };
 
-const upload = multer({
+const uploader = multer({
   storage: storage,
   fileFilter: imageFileFilter,
 });
@@ -29,8 +36,21 @@ const uploadRouter = express.Router();
 uploadRouter
   .route("/")
 
-  .post(upload.single("imageFile"), (req, res) => {
-    res.json(req.file);
+  .post(uploader.single("imageFile"), async (req, res) => {
+    const options = {
+      user_filename: true,
+      unique_filename: true,
+    };
+    try {
+      const file = req?.file?.path;
+
+      const data = await cloudinary.uploader.upload(file);
+      res
+        .status(200)
+        .json({ data: data.url, message: "File uploded sucessfully" });
+    } catch (error) {
+      console.log(error, "file upload fail");
+    }
   });
 
- export default uploadRouter;
+export default uploadRouter;

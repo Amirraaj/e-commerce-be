@@ -4,16 +4,21 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import router from "./routes/index.js";
+import cloudinary from "cloudinary";
 
 
 const app = express();
 
 dotenv.config();
 
+
+// console.log(cloudinary.config());
+
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
+// app.use(express.static(__dirname + "/public/upload"));
 
 app.use('/',router)
 

@@ -22,7 +22,7 @@ export const getAllProduct = async(request, response) =>{
     }
 }
 
-export const getProductById = async(request,response) =>{
+export const getProductById = async(request,  response) =>{
     try {
         const product = await Product.findById(request.params.id).populate("category_id");
         response.json({status: 200, message:"Product fetched Sucessfully", data:product});
