@@ -3,9 +3,8 @@ import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import path from "path";
 
-const storage = multer.diskStorage({
-  // destination: "./public/upload",
 
+const storage = multer.diskStorage({
   filename: (req, file, callback) => {
     let ext = path.extname(file.originalname);
 
@@ -42,7 +41,7 @@ uploadRouter
       unique_filename: true,
     };
     try {
-      const file = req?.file?.path;
+      const file = (req?.file?.path);
 
       const data = await cloudinary.uploader.upload(file);
       res

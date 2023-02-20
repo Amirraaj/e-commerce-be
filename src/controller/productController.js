@@ -39,3 +39,17 @@ export const deleteProduct = async(request, response) =>{
         response.json({status:500, message:"Internal Server error"})
     }
 }
+
+export const getProductByCategory = async(request, response) =>{
+    try{
+        const categoryId = request.params.id;
+        const allProduct = await Product.find({}).populate("category_id");
+        const filterProduct = allProduct.filter((product) =>{
+            return product.category_id.id === categoryId
+        })
+        response.json({status: 200, message:"Product fetched Sucessfully", data:filterProduct});
+    
+    }catch(error){
+        response.json({status:500, message:"Internal Server error"})
+    }
+}
