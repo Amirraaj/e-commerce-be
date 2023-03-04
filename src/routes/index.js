@@ -3,6 +3,7 @@ import categoryRoute from "./category.route.js";
 import productRoute from "./product.route.js";
 import uploadRouter from "./fileUpload.router.js";
 import userRouter from "./user.route.js";
+import orderRouter from "./order.route.js";
 const router = express.Router();
 
 const defaultRoutes = [
@@ -24,7 +25,11 @@ const defaultRoutes = [
     {
         path:"/user",
         route: userRouter,
-    }  
+    },
+    {
+        path:"/order",
+        router: orderRouter,
+    }
 ]
 
 defaultRoutes.forEach((route) =>{

@@ -46,7 +46,7 @@ export const getProductByCategory = async(request, response) =>{
         const allProduct = await Product.find({}).populate("category_id");
         const filterProduct = allProduct.filter((product) =>{
             return product.category_id.id === categoryId
-        })
+        }).slice(0,10)
         response.json({status: 200, message:"Product fetched Sucessfully", data:filterProduct});
     
     }catch(error){

@@ -19,12 +19,13 @@ export const addUser = async (request, response) => {
   }
 };
 
-export const logIn = async (request, response) => {
+export const logIn = async (request, response, next) => {
   try {
     const user = await User.findOne({ email: request.body.email });
 
     if (!user) {
       response.json({ status: 401, message: "Invalid Email or Password ." });
+      next()
     }
     const validPassword = await bcrypt.compare(
       request.body.password,
@@ -33,8 +34,9 @@ export const logIn = async (request, response) => {
     if (!validPassword) {
       response.json({
         status: 401,
-        message: "Authentication failed. Invalid Password .",
+        message: "Invalid Email or Password .",
       });
+      return next();
     }
     response.json({
       status: 201,
