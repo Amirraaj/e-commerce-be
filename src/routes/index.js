@@ -30,7 +30,6 @@ const defaultRoutes = [
         path:"/order",
         route: orderRouter,
     }
-   
 ]
 
 defaultRoutes.forEach((route) =>{
