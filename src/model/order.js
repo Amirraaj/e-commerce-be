@@ -21,7 +21,7 @@ const orderSchema = new mongoose.Schema(
         type: String,
         require: true,
       },
-      mummontem: {
+      monument: {
         type: String,
         require: true,
       },
@@ -43,6 +43,9 @@ const orderSchema = new mongoose.Schema(
       },
     ],
     status:{
+      type: String,
+    },
+    paymentMethod:{
       type: String,
     }
   },

@@ -6,10 +6,12 @@ export const addOrder = async (request, response) => {
   try {
     const order = request.body;
     const newOrder = await new Order(order).save();
+   const id =newOrder._id.toString();
     response.json({
       status: 201,
       message: "Order Created Sucessfully",
       data: newOrder,
+      orderId :id
     });
   } catch (error) {
     response.json({ status: 500, message: "Internal Server error" });
