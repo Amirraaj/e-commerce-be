@@ -24,7 +24,7 @@ export const getAllOrder = async (request, response) => {
     response.json({
       status: 200,
       message: "Order fetched Sucessfully",
-      data: order,
+      data: order.reverse( ),
     });
   } catch (error) {
     response.json({ status: 500, message: "Internal Server error" });
@@ -37,7 +37,6 @@ export const getOneOderById = async (request, response) => {
     const { _id, firstName, lastName, userName, email } = order.user_id;
     const productArray = order.products;
     const product = await Product.find({}).populate("category_id");
-
     const productsDetails = product.filter((prod) => {
       const newId = prod._id.toString();
       return productArray.find((items) => {

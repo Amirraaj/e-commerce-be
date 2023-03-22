@@ -67,8 +67,9 @@ export const getUserByID = async (request, response) => {
 export const getAllUser = async(request, response) =>{
     try{
         const user = await User.find();
+
         let newUser = user.map((
-            { firstName, lastName, userName, email, phone }) => ({ firstName, lastName, userName, email, phone }));
+            {_id, firstName, lastName, userName, email, phone }) => ({_id, firstName, lastName, userName, email, phone }));
 
         response.json({ status: 201, message:"Users fetch sucessfully", data:newUser });
     }catch(error){
