@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import product from "./product.js";
 import user from "./user.js";
 
 const orderSchema = new mongoose.Schema(
@@ -29,7 +30,8 @@ const orderSchema = new mongoose.Schema(
     products: [
       {
         product_id: {
-          type: String,
+          type: mongoose.Schema.Types.ObjectId,
+          ref: product,
           require: true,
         },
         size: {

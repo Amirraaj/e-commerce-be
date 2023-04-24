@@ -25,7 +25,7 @@ export const logIn = async (request, response, next) => {
 
     if (!user) {
       response.json({ status: 401, message: "Invalid Email or Password ." });
-      next()
+      next();
     }
     const validPassword = await bcrypt.compare(
       request.body.password,
@@ -42,6 +42,7 @@ export const logIn = async (request, response, next) => {
       status: 201,
       message: "Login Sucessfull",
       token: jwt.sign({ _id: user?._id }, process.env.SECRET),
+      role: user?.role,
     });
   } catch (error) {
     response.json({ status: 500, message: "Internal Server error" });
@@ -64,15 +65,28 @@ export const getUserByID = async (request, response) => {
   }
 };
 
-export const getAllUser = async(request, response) =>{
-    try{
-        const user = await User.find();
+export const getAllUser = async (request, response) => {
+  try {
+    const user = await User.find();
 
-        let newUser = user.map((
-            {_id, firstName, lastName, userName, email, phone }) => ({_id, firstName, lastName, userName, email, phone }));
+    let newUser = user.map(
+      ({ _id, firstName, lastName, userName, email, phone, role }) => ({
+        _id,
+        firstName,
+        lastName,
+        userName,
+        email,
+        phone,
+        role,
+      })
+    );
 
-        response.json({ status: 201, message:"Users fetch sucessfully", data:newUser });
-    }catch(error){
-        response.json({status:500, message:"Internal Server error"})
-    }
-}
+    response.json({
+      status: 201,
+      message: "Users fetch sucessfully",
+      data: newUser,
+    });
+  } catch (error) {
+    response.json({ status: 500, message: "Internal Server error" });
+  }
+};

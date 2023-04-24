@@ -10,9 +10,7 @@ const defaultRoutes = [
     {
         path:"/category",
         route: categoryRoute,
-        
     },
-    
     {
         path:"/product",
         route: productRoute,
