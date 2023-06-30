@@ -12,9 +12,9 @@ const storage = multer.diskStorage({
 });
 
 cloudinary.config({
-  cloud_name: "dehuqnzug",
-  api_key: "243318197547763",
-  api_secret: "VCJWeThPJYf8E3wmbfJ6OlDhCzI",
+  cloud_name: process.env.CLOUDE_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 const imageFileFilter = (req, file, cb) => {
